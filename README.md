@@ -1,30 +1,30 @@
-Arduino 10/16 pin Eurorack IDC Power Cable Tester
+Eurorack Arduino 10/16 pin IDC Power Cable Tester
 =================================================
 
-Forked from [https://github.com/tomarus/cabletester](https://github.com/tomarus/cabletester) with slight modifications to circuit and software (mainly order of connections), and with PCB layout added.
+Forked from [holmesrichards](https://github.com/holmesrichards/cabletester) Original idea and testing algorithm goes to [tomarus](https://github.com/tomarus/cabletester ). This version has a new PCB (ready to be used with JLCPCB) and Some modifications to the FW made into a Platformio project.
 
 * It only tests (max) 8 wires because of how they're wired in eurorack.
 * It can detect shorted cables or faulty/unconnected wires.
+* Possible to run a _calibration_ sketch for more accurate readings.
+* `GND-VCC-SCL-SDA` and `VCC-GND-SCL-SDA` Oled configuration allowed.
 
-This project uses a 128x64 OLED I2C display module with four interface pins: GND, +12V, SCL, and SDA. It is a monochrome display although it is available in a version with a yellow and blue overlay as seen in the photos. Note that the OLED pinout sometimes is GND-VCC-SCL-SDA and sometimes VCC-GND-SCL-SDA. The initial run of boards assumed the latter pinout; the present design has footprints for both.
 
-These modules are available from the "usual suspects" on Amazon, eBay, AliExpress, etc. I have one of [these](https://www.amazon.com/gp/product/B072Q2X2LL) (GND-VCC-SCL-SDA) and one of [these](https://www.amazon.com/gp/product/B07FK8GB8T) (VCC-GND-SCL-SDA). They do *not* seem to be available from any established vendors like Mouser, DigiKey, Tayda, Adafruit, or SparkFun. Please make sure you have a source for the display before proceeding with this project! 
+The original documentation and repo information is under _OGs_ folder. Gerbers, schematics and BOM are under _HW_ while the Platformio project is under _FW_.
 
-Code uses these libraries:
+# Calibration
 
-* https://github.com/adafruit/Adafruit_SSD1306
-* https://github.com/adafruit/Adafruit-GFX-Library
+Default values should work fine:
+```
+const int expect[] = {746, 544, 395, 286, 204, 130, 80, 35};
+```
+But is recommended to make a _calibration_ run to change to proper values. To do that:
+- Define `DEBUG` mode by uncommenting line 7. 
+- Plug a 16 pin Cable that is known to be work fine. 
+- Flash the arduino and open Serialmonitor. the `expect` values will be printed, they should not differ too much from default values. 
+- Change the `expect` values, comment the `DEBUG` define and re-flash
 
-![picture](docs/image-pcb.jpg)
-![picture](docs/image-nocable.jpg)
-![picture](docs/image-shorted.jpg)
-![picture](docs/image-bad.jpg)
-![picture](docs/image-ok.jpg)
+![picture](docs/cabletester.jpg)
 
 # Schematics
 
-![schematics](docs/cabletester.png)
-
-# PCB
-
-![schematics](docs/cabletester_pcb.png)
+![schematics](docs/schematic.png)
