@@ -1,13 +1,13 @@
 Eurorack Arduino 10/16 pin IDC Power Cable Tester
 =================================================
 
-Forked from [holmesrichards](https://github.com/holmesrichards/cabletester) Original idea and testing algorithm goes to [tomarus](https://github.com/tomarus/cabletester ). This version has a new PCB (ready to be used with JLCPCB) and Some modifications to the FW made into a Platformio project.
+Forked from [holmesrichards](https://github.com/holmesrichards/cabletester) Original idea and testing algorithm goes to [tomarus](https://github.com/tomarus/cabletester ). This version has a new PCB and Some modifications to the FW made into a Platformio project.
 
 * It only tests (max) 8 wires because of how they're wired in eurorack.
 * It can detect shorted cables or faulty/unconnected wires.
 * Possible to run a _calibration_ sketch for more accurate readings.
 * `GND-VCC-SCL-SDA` and `VCC-GND-SCL-SDA` Oled configuration allowed.
-
+* JLCPCB Gerber ready zip
 
 The original documentation and repo information is under _OGs_ folder. Gerbers, schematics and BOM are under _HW_ while the Platformio project is under _FW_.
 
